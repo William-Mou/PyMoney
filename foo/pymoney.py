@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# PROJECT_LINK : https://github.com/William-Mou/PyMoney
+
 dollar = input("How much money do you have? ")
 add_item = input(
     "Add an expense or income record with description and amount:\n")
