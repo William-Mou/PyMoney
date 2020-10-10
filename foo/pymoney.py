@@ -2,7 +2,7 @@
 # PROJECT_LINK : https://github.com/William-Mou/PyMoney
 item_list = []
 dollar = input("How much money do you have? ")
-print("Add an expense or income record with description and amount:")
+print("Add an expense or income record with description and amount:(Enter 'q' to End)")
 while True:
     add_item = input()
     if add_item == "q":
