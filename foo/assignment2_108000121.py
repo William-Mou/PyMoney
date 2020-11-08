@@ -9,13 +9,17 @@ fname = "records.txt"
 
 
 def initialize():
+    """
+    初始化
+    """
+    # 檢查是否低一次執行
     if os.path.isfile(fname):
         print("Welcome back!")
         try:
             with open(fname, 'rb') as file:
                 item_list = pickle.load(file)
                 return item_list
-
+        # 檢查檔案是否正常
         except EOFError:
             print("File is corrupted!\nPlease remove the " + fname + " file!")
             item_list = []
@@ -41,21 +45,37 @@ def initialize():
 
 
 def add(item_list):
+    """
+    加入新記帳的項目
+    """
     add_item = input(
         "Add an expense or income record with description and amount:\n")
     try:
         item, money = add_item.split()
     except ValueError:
         print("You should input a text and a number! ex:dinner -75")
+        return item_list
     try:
         money = int(money)
     except ValueError:
         print("You should input a text and a number! ex:dinner -75")
-    item_list.append((item, money))
+        return item_list
+    except UnboundLocalError:
+        print("You should input a text and a number! ex:dinner -75")
+        return item_list
+    try:
+        item_list.append((item, money))
+    except UnboundLocalError:
+        print("You should input a text and a number! ex:dinner -75")
+        return item_list
+
     return item_list
 
 
 def view(item_list):
+    """
+    列印出記帳項目內容
+    """
     print(item_list)
     sum_dollar = sum([pair[1] for pair in item_list])
     row_format = "{:>15}" * 3
@@ -68,26 +88,34 @@ def view(item_list):
 
 
 def delete(item_list):
+    """
+    依照 ID 刪除記帳項目內容
+    """
     try:
         delete_number = int(
             input("which line doe you want to delete?"))
     except ValueError:
         print("You should input a number!")
-    if delete_number < len(item_list) or delete_number > 0:
-        item_list.pop(delete_number)
-        return item_list
     else:
-        print("delete number is not exist")
+        # 檢查 ID 是不是合法的
+        if delete_number < len(item_list) or delete_number > 0:
+            item_list.pop(delete_number)
+            return item_list
+        else:
+            print("delete number is not exist")
 
 
 def save(item_list):
+    """
+    儲存內容到檔案內
+    """
     with open(fname, 'wb') as file:
         pickle.dump(item_list, file)
 
 
 if __name__ == '__main__':
     item_list = initialize()
-
+    # 不斷讀入指令
     while(True):
         command = input("What do you want to do (add / view / delete / exit)?")
         if command == "add":
