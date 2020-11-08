@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # PROJECT_LINK : https://github.com/William-Mou/PyMoney
 
-import pickle
 import os.path
 
 row_list = ["Description", "Amount"]
@@ -16,9 +15,14 @@ def initialize():
     if os.path.isfile(fname):
         print("Welcome back!")
         try:
-            with open(fname, 'rb') as file:
-                item_list = pickle.load(file)
-                return item_list
+            with open(fname, 'r') as file:
+                item_list = []
+                #print(file.readline())
+                for i in file.readlines():
+                    tmp = i.split()
+                    item_list.append((tmp[0],int(tmp[1])))
+                #print(item_list)
+            return item_list
         # 檢查檔案是否正常
         except EOFError:
             print("File is corrupted!\nPlease remove the " + fname + " file!")
@@ -76,7 +80,7 @@ def view(item_list):
     """
     列印出記帳項目內容
     """
-    print(item_list)
+   # print(item_list)
     sum_dollar = sum([pair[1] for pair in item_list])
     row_format = "{:>15}" * 3
     print(row_format.format("", *row_list))
@@ -109,8 +113,14 @@ def save(item_list):
     """
     儲存內容到檔案內
     """
-    with open(fname, 'wb') as file:
-        pickle.dump(item_list, file)
+    ouput = []
+    for i in item_list:
+        ouput.append(str(i[0]) + " " + str(i[1]) + "\n")
+    print(ouput)
+    with open(fname, 'w') as file:
+        file.writelines(ouput)
+
+        #pickle.dump(item_list, file)
 
 
 if __name__ == '__main__':
