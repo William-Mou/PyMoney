@@ -1,4 +1,4 @@
 Init Init 1234
 food 23 123
-fo ads 23
-fo asd -123
+bonus asd 123
+income ad 123
