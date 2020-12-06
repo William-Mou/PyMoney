@@ -1,4 +1,3 @@
-Init Init 1234
-food 23 123
-bonus asd 123
-income ad 123
+Init Init 2134
+income dsfas 123
+transportation asd -2134

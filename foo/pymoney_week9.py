@@ -121,7 +121,6 @@ class Records:
             while(True):
                 try:
                     dollar = int(input("How much money do you have? "))
-
                 except ValueError:
                     print("You should input a number!")
                 else:

@@ -150,24 +150,23 @@ class Records:
             except EOFError:
                 print("File is corrupted!\nPlease remove the " + fname + " file!")
                 self.item_list = []
-                while(True):
-                    try:
-                        dollar = int(input("How much money do you have? "))
-                    except ValueError:
-                        print("You should input a number!")
-                    else:
-                        self.item_list.append(("Init", "Init", dollar))
-                        print(self.item_list)
-        else:
-            self.item_list = []
-            while(True):
+
                 try:
                     dollar = int(input("How much money do you have? "))
-
                 except ValueError:
                     print("You should input a number!")
                 else:
                     self.item_list.append(("Init", "Init", dollar))
+                    print(self.item_list)
+        else:
+            self.item_list = []
+
+            try:
+                dollar = int(input("How much money do you have? "))
+            except ValueError:
+                print("You should input a number!")
+            else:
+                self.item_list.append(("Init", "Init", dollar))
 
     def add(self, add_item, categories):
         """
